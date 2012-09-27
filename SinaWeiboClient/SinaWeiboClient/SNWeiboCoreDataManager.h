@@ -22,6 +22,6 @@
 -(NSData *)readImageFromCD:(NSString *)key;
 
 -(void)insertStatusToCD:(Status *)status withIndex:(NSInteger)index isHomeLine:(BOOL)isHomeLine;
--(NSArray *)readStatusFromCDisHomeLine:(BOOL)isHomeLine;
-
+-(NSMutableArray *)readStatusFromCDisHomeLine:(BOOL)isHomeLine;
+-(void)clearStatusInCDisHomeLine:(BOOL)isHomeLine;
 @end

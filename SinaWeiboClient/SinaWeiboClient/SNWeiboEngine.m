@@ -8,8 +8,8 @@
 
 #import "SNWeiboEngine.h"
 
-#import "SNWeiboHttpManager.h"
 
+#import "SNWeiboHttpManager.h"
 #import "SHKActivityIndicator.h"
 
 
@@ -82,6 +82,20 @@
     [self.httpManager getHomeTimeLineWithCount:count Page:page feature:feature];
 }
 
+-(void)getCommentsToShowWithStatusId:(NSNumber *)statusId Count:(NSInteger)count  Page:(NSInteger)page filter:(NSInteger)filter_by_author
+{
+    [self.httpManager getCommentsToShowWithStatusId:statusId Count:count Page:page filter:filter_by_author];
+}
+
+
+-(void)postStatus:(NSString *)text withImage:(UIImage *)image
+{
+    if (image) {
+        [self.httpManager postStatus:text withImage:image];
+    }else {
+        [self.httpManager postStatus:text];
+    }
+}
 
 
 
@@ -110,5 +124,22 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
+-(void)didGetCommentsToShow:(NSMutableArray *)commentsArr
+{
+    NSDictionary *userInfo=[NSDictionary dictionaryWithObject:commentsArr forKey:COMMENTSTOSHOW];
+    NSNotification *notification=[NSNotification notificationWithName:SINA_DIDGETCOMMENTSTOSHOW object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+
+-(void)didSucceedPostUpdate
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SINA_DIDSUCCEEDPOSTUPDATE object:self];
+}
+
+-(void)didSucceedPostUpload
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SINA_DIDSUCCEEDPOSTUPLOAD object:self];
+}
 
 @end

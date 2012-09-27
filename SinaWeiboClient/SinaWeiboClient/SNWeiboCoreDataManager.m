@@ -171,7 +171,7 @@
 }
 
 
--(NSArray *)readStatusFromCDisHomeLine:(BOOL)isHomeLine
+-(NSMutableArray *)readStatusFromCDisHomeLine:(BOOL)isHomeLine
 {
     NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"StatusCDModel"];
     request.predicate=[NSPredicate predicateWithFormat:@"isHomeLine = %d",isHomeLine];
@@ -187,7 +187,41 @@
         return nil;
     }
     NSLog(@"Status Count Read From Core Data:%d",[results count]);
-    return results;
+    NSMutableArray *statusData=[NSMutableArray array];
+    for (StatusCDModel *model in results) {
+        Status *status=[[Status alloc] init];
+        [status updateStatusWithStatusCDModel:model];
+        [statusData addObject:status];
+    }
+    return statusData;
+}
+
+-(void)clearStatusInCDisHomeLine:(BOOL)isHomeLine
+{
+    NSFetchRequest *request=[NSFetchRequest fetchRequestWithEntityName:@"StatusCDModel"];
+    request.predicate=[NSPredicate predicateWithFormat:@"isHomeLine = %d",isHomeLine];
+    NSSortDescriptor *sort=[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+    request.sortDescriptors=[NSArray arrayWithObject:sort];
+    
+    
+    NSError *error=nil;
+    NSArray *results=[self.managedContext executeFetchRequest:request error:&error];
+    
+    if (!results || error) {
+        NSLog(@"Deletion:read status from Core Data failed:%@",error.localizedDescription);
+        
+    }
+    
+    for (StatusCDModel *status in results) {
+        [self.managedContext deleteObject:status];
+    }
+    
+    NSError *saveError=nil;
+    
+    if (![self.managedContext save:&saveError]) {
+        NSLog(@"Delete Status in Core Data Failed:%@",error.localizedDescription);
+    }
+
 }
 
 

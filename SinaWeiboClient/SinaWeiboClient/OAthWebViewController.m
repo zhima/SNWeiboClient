@@ -64,7 +64,7 @@
     
     
     NSDate *expiredate=[NSDate dateWithTimeIntervalSinceNow:[expire_in intValue]];
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:ACCESS_TOKEN];
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:ACCESS_TOKEN];
     [[NSUserDefaults standardUserDefaults] setObject:expiredate forKey:EXPIRE_IN_DATE];
     [[NSUserDefaults standardUserDefaults] setObject:uid forKey:USER_ID];

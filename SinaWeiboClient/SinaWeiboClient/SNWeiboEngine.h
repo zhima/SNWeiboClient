@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "OAthWebViewController.h"
 #import "SNWeiboImageDownload.h"
+#import "SNWeiboDefines.h"
 
-#define HOMETIMELINE @"HOMETIMELINE"
+
+
 
 @interface SNWeiboEngine : NSObject
 
@@ -21,6 +23,8 @@
 -(void)getImageWithURL:(NSString *)url;
 -(BOOL)hasAccessTokenOutOfDate;
 
--(void)getHomeTimeLineWithCount:(NSInteger)count Page:(NSInteger)page feature:(NSInteger)feature;
+-(void)postStatus:(NSString *)text withImage:(UIImage *)image;
 
+-(void)getHomeTimeLineWithCount:(NSInteger)count Page:(NSInteger)page feature:(NSInteger)feature;
+-(void)getCommentsToShowWithStatusId:(NSNumber *)statusId Count:(NSInteger)count  Page:(NSInteger)page filter:(NSInteger)filter_by_author;
 @end

@@ -13,6 +13,10 @@
 #import "StatusTableViewCell.h"
 #import "SHKActivityIndicator.h"
 #import "Status.h"
+#import "SNWeiboCoreDataManager.h"
+#import "SNWeiboSendWeiboViewController.h"
+#import "SNWeiboDetailViewController.h"
+
 
 #define UITEXTVIEW_PADDING_WIDTH 16.0f
 
@@ -48,7 +52,9 @@
 
 -(void)postStatus
 {
-
+    SNWeiboSendWeiboViewController *sendViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"Send Weibo"];
+    sendViewController.viewController=self;
+    [self presentModalViewController:sendViewController animated:NO];
 }
 
 
@@ -73,8 +79,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetHomeTimeLine:) name:SINA_DIDGETHOMETIMELINE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetAccessToken:) name:DID_GET_ACCESS_TOKEN object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRequestFailed:) name:SINA_REQUESTFAILED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
     
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:ACCESS_TOKEN];
+   // [[NSUserDefaults standardUserDefaults] removeObjectForKey:ACCESS_TOKEN];
     NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:ACCESS_TOKEN];
     if (token==nil||([token length]<=0)) {
         [self.weiboEngine loginInViewController:self];
@@ -85,15 +92,46 @@
         [self.weiboEngine loginInViewController:self];
         return;
     }
+    BOOL succeedGetData=[self getData];
+    if (succeedGetData) {
+        return;
+    }else {
+        [self.weiboEngine getHomeTimeLineWithCount:20 Page:1 feature:0];
+        //[[SHKActivityIndicator currentIndicator] displayActivity:@"Loading" inView:self.view];
+    }
     
-    [self.weiboEngine getHomeTimeLineWithCount:20 Page:1 feature:0];
-    [[SHKActivityIndicator currentIndicator] displayActivity:@"Loading" inView:self.view];
     //[[SHKActivityIndicator currentIndicator] displayActivity:@"Loading" inView:self.view];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(BOOL)getData
+{
+    SNWeiboCoreDataManager *coreDataManager=[SNWeiboCoreDataManager getInstance];
+    [[SHKActivityIndicator currentIndicator] displayActivity:@"Loading" inView:self.view];
+    self.statuses=[coreDataManager readStatusFromCDisHomeLine:YES];
+    if (self.statuses==nil||([self.statuses count]==0)) {
+        return NO;
+    }
+    NSLog(@"Read %d status data from Core Data",[self.statuses count]);
+    [self getImage];
+    return YES;
+}
+
+-(void)applicationWillResignActive
+{
+    if (self.statuses==nil) {
+        return;
+    }
+    NSLog(@"Application Will Resign Active,inserting status into Core Data");
+    SNWeiboCoreDataManager *coreDataManager=[SNWeiboCoreDataManager getInstance];
+    [coreDataManager clearStatusInCDisHomeLine:YES];
+    for (NSInteger i=0; i<[self.statuses count]; i++) {
+        [coreDataManager insertStatusToCD:[self.statuses objectAtIndex:i] withIndex:i isHomeLine:YES];
+    }
 }
 
 -(void)handleRequestFailed:(NSNotification *)notification
@@ -193,16 +231,22 @@
 }
 
 
-
-- (void)viewDidUnload
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [self setTableView:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETRESPONSEERROR object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DID_GET_ACCESS_TOKEN object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETHOMETIMELINE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_REQUESTFAILED object:nil];
-    self.statuses=nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [super viewWillDisappear:animated];
+}
+
+
+- (void)viewDidUnload
+{
+    [self setTableView:nil];
+       self.statuses=nil;
     self.avaterImages=nil;
     self.contentImages=nil;
     self.weiboEngine=nil;
@@ -232,12 +276,14 @@
     return [self.statuses count];
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Status Cell";
     StatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell==nil) {
-        cell=[[StatusTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Status Cell"];
+        cell=[[StatusTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Status Cell"];
         
     }
     
@@ -297,7 +343,7 @@
     }else if (item.retweetedStatus) {
         NSString *repostText=[NSString stringWithFormat:@"%@:%@",item.retweetedStatus.user.screenName,item.retweetedStatus.text];
         height+=[self heightForTV:repostText withWidth:260.0f];
-        height-=36.0f;
+        height-=56.0f;
         //NSLog(@"height for retwitterText:%f index:%d",[self heightForTV:repostText withWidth:195.0f],indexPath.row);
         
         if (item.retweetedStatus.thumbnailPic&&([item.retweetedStatus.thumbnailPic length]>0)) {
@@ -324,6 +370,19 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    //Detail VC
+    SNWeiboDetailViewController *detailViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"Detail VC"];
+    detailViewController.status=[self.statuses objectAtIndex:indexPath.row];
+    detailViewController.avaterImageData=[self.avaterImages objectForKey:detailViewController.status.user.profileImageUrl];
+    detailViewController.contentImageData=nil;
+    if (detailViewController.status.thumbnailPic&&([detailViewController.status.thumbnailPic length]>0)) {
+       detailViewController.contentImageData=[self.contentImages    objectForKey:detailViewController.status.thumbnailPic];
+    }
+    
+    if (detailViewController.status.retweetedStatus.thumbnailPic&&([detailViewController.status.retweetedStatus.thumbnailPic length]>0)) {
+       detailViewController.contentImageData=[self.contentImages    objectForKey:detailViewController.status.retweetedStatus.thumbnailPic];
+    }
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 @end

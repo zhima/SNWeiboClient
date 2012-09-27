@@ -29,9 +29,11 @@
 		CED26E2D1608993100F99A1F /* StatusCDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CED26E2C1608993100F99A1F /* StatusCDModel.m */; };
 		CED26E3016089B8B00F99A1F /* UserCDModel+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = CED26E2F16089B8B00F99A1F /* UserCDModel+Utils.m */; };
 		CED33D8A16075DF8004F9066 /* retweet_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CED33D8916075DF8004F9066 /* retweet_bg.png */; };
+		CED4585416114D6400C31A6B /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4585316114D6400C31A6B /* CommentTableViewCell.m */; };
 		CED53609160219CA00C6996C /* SNWeiboEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = CED53608160219CA00C6996C /* SNWeiboEngine.m */; };
 		CED595B215FF12C800AE4DA6 /* timeline_rt_border_t.png in Resources */ = {isa = PBXBuildFile; fileRef = CED595B015FF12C800AE4DA6 /* timeline_rt_border_t.png */; };
 		CED595B315FF12C800AE4DA6 /* timeline_rt_border_t@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CED595B115FF12C800AE4DA6 /* timeline_rt_border_t@2x.png */; };
+		CED5B360160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5B35F160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m */; };
 		CED5E26E15FBA7AB00F973CB /* StatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5E26D15FBA7AB00F973CB /* StatusTableViewCell.m */; };
 		CED63C5015FC737A007CD803 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CED63C4915FC737A007CD803 /* Comment.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED63C5115FC737A007CD803 /* Draft.m in Sources */ = {isa = PBXBuildFile; fileRef = CED63C4B15FC737A007CD803 /* Draft.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -52,6 +54,24 @@
 		CED80B2015F5AF1D00476915 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CED80B1615F5AF1D00476915 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED80B2515F5AF7100476915 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CED80B2215F5AF7100476915 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED80B2615F5AF7100476915 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED80B2415F5AF7100476915 /* PullRefreshTableViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEDAB965160B3F680013155F /* DESinaWeiboSheetCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDAB964160B3F680013155F /* DESinaWeiboSheetCardView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEDAB969160B3F870013155F /* DETweetCardBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB967160B3F870013155F /* DETweetCardBackground.png */; };
+		CEDAB96A160B3F870013155F /* DETweetCardBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB968160B3F870013155F /* DETweetCardBackground@2x.png */; };
+		CEDAB96D160B436C0013155F /* DETweetPaperClip.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB96B160B436C0013155F /* DETweetPaperClip.png */; };
+		CEDAB96E160B436C0013155F /* DETweetPaperClip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB96C160B436C0013155F /* DETweetPaperClip@2x.png */; };
+		CEDAB973160B45550013155F /* DETweetCancelButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB96F160B45550013155F /* DETweetCancelButtonPortrait.png */; };
+		CEDAB974160B45550013155F /* DETweetCancelButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB970160B45550013155F /* DETweetCancelButtonPortrait@2x.png */; };
+		CEDAB975160B45550013155F /* DETweetSendButtonPortrait.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB971160B45550013155F /* DETweetSendButtonPortrait.png */; };
+		CEDAB976160B45550013155F /* DETweetSendButtonPortrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB972160B45550013155F /* DETweetSendButtonPortrait@2x.png */; };
+		CEDAB97D160B48130013155F /* DEEmbossedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDAB978160B48130013155F /* DEEmbossedLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEDAB97E160B48130013155F /* DERuledView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDAB97A160B48130013155F /* DERuledView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEDAB97F160B48130013155F /* DESinaWeiboTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDAB97C160B48130013155F /* DESinaWeiboTextView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CEDAB985160B4A760013155F /* SNWeiboSendWeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDAB984160B4A760013155F /* SNWeiboSendWeiboViewController.m */; };
+		CEDAB988160B51B00013155F /* noImage50x118.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB986160B51B00013155F /* noImage50x118.png */; };
+		CEDAB989160B51B00013155F /* noImage50x118@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDAB987160B51B00013155F /* noImage50x118@2x.png */; };
+		CEDBAD4C160EAF7D0086BBAF /* DETweetCardAccountLine.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDBAD4A160EAF7D0086BBAF /* DETweetCardAccountLine.png */; };
+		CEDBAD4D160EAF7D0086BBAF /* DETweetCardAccountLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDBAD4B160EAF7D0086BBAF /* DETweetCardAccountLine@2x.png */; };
+		CEDBAD57160EBD120086BBAF /* SNWeiboDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDBAD56160EBD120086BBAF /* SNWeiboDetailViewController.m */; };
 		CEDC794D160860D80002A2BE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDC794B160860D80002A2BE /* home.png */; };
 		CEDC794E160860D80002A2BE /* LOGO_48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDC794C160860D80002A2BE /* LOGO_48x48.png */; };
 		CEDFCB0B16002FD300371A10 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDFCB0A16002FD300371A10 /* CoreData.framework */; };
@@ -119,10 +139,14 @@
 		CED26E2E16089B8B00F99A1F /* UserCDModel+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserCDModel+Utils.h"; sourceTree = "<group>"; };
 		CED26E2F16089B8B00F99A1F /* UserCDModel+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserCDModel+Utils.m"; sourceTree = "<group>"; };
 		CED33D8916075DF8004F9066 /* retweet_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retweet_bg.png; sourceTree = "<group>"; };
+		CED4585216114D6400C31A6B /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		CED4585316114D6400C31A6B /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
 		CED53607160219CA00C6996C /* SNWeiboEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboEngine.h; sourceTree = "<group>"; };
 		CED53608160219CA00C6996C /* SNWeiboEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboEngine.m; sourceTree = "<group>"; };
 		CED595B015FF12C800AE4DA6 /* timeline_rt_border_t.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeline_rt_border_t.png; sourceTree = "<group>"; };
 		CED595B115FF12C800AE4DA6 /* timeline_rt_border_t@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_rt_border_t@2x.png"; sourceTree = "<group>"; };
+		CED5B35E160F003400D5C8C9 /* SNWeiboDetailHeaderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboDetailHeaderVC.h; sourceTree = "<group>"; };
+		CED5B35F160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboDetailHeaderVC.m; sourceTree = "<group>"; };
 		CED5E26C15FBA7AB00F973CB /* StatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusTableViewCell.h; sourceTree = "<group>"; };
 		CED5E26D15FBA7AB00F973CB /* StatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusTableViewCell.m; sourceTree = "<group>"; };
 		CED63C4815FC737A007CD803 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -167,6 +191,31 @@
 		CED80B2215F5AF7100476915 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		CED80B2315F5AF7100476915 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		CED80B2415F5AF7100476915 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
+		CEDA5E24160C9B2E00995ED1 /* SNWeiboDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboDefines.h; sourceTree = "<group>"; };
+		CEDAB963160B3F680013155F /* DESinaWeiboSheetCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESinaWeiboSheetCardView.h; sourceTree = "<group>"; };
+		CEDAB964160B3F680013155F /* DESinaWeiboSheetCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESinaWeiboSheetCardView.m; sourceTree = "<group>"; };
+		CEDAB967160B3F870013155F /* DETweetCardBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DETweetCardBackground.png; sourceTree = "<group>"; };
+		CEDAB968160B3F870013155F /* DETweetCardBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DETweetCardBackground@2x.png"; sourceTree = "<group>"; };
+		CEDAB96B160B436C0013155F /* DETweetPaperClip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DETweetPaperClip.png; sourceTree = "<group>"; };
+		CEDAB96C160B436C0013155F /* DETweetPaperClip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DETweetPaperClip@2x.png"; sourceTree = "<group>"; };
+		CEDAB96F160B45550013155F /* DETweetCancelButtonPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DETweetCancelButtonPortrait.png; sourceTree = "<group>"; };
+		CEDAB970160B45550013155F /* DETweetCancelButtonPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DETweetCancelButtonPortrait@2x.png"; sourceTree = "<group>"; };
+		CEDAB971160B45550013155F /* DETweetSendButtonPortrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DETweetSendButtonPortrait.png; sourceTree = "<group>"; };
+		CEDAB972160B45550013155F /* DETweetSendButtonPortrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DETweetSendButtonPortrait@2x.png"; sourceTree = "<group>"; };
+		CEDAB977160B48130013155F /* DEEmbossedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEmbossedLabel.h; sourceTree = "<group>"; };
+		CEDAB978160B48130013155F /* DEEmbossedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEmbossedLabel.m; sourceTree = "<group>"; };
+		CEDAB979160B48130013155F /* DERuledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DERuledView.h; sourceTree = "<group>"; };
+		CEDAB97A160B48130013155F /* DERuledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DERuledView.m; sourceTree = "<group>"; };
+		CEDAB97B160B48130013155F /* DESinaWeiboTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESinaWeiboTextView.h; sourceTree = "<group>"; };
+		CEDAB97C160B48130013155F /* DESinaWeiboTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESinaWeiboTextView.m; sourceTree = "<group>"; };
+		CEDAB983160B4A760013155F /* SNWeiboSendWeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNWeiboSendWeiboViewController.h; path = ../SNWeiboSendWeiboViewController.h; sourceTree = "<group>"; };
+		CEDAB984160B4A760013155F /* SNWeiboSendWeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNWeiboSendWeiboViewController.m; path = ../SNWeiboSendWeiboViewController.m; sourceTree = "<group>"; };
+		CEDAB986160B51B00013155F /* noImage50x118.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage50x118.png; sourceTree = "<group>"; };
+		CEDAB987160B51B00013155F /* noImage50x118@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noImage50x118@2x.png"; sourceTree = "<group>"; };
+		CEDBAD4A160EAF7D0086BBAF /* DETweetCardAccountLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DETweetCardAccountLine.png; sourceTree = "<group>"; };
+		CEDBAD4B160EAF7D0086BBAF /* DETweetCardAccountLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DETweetCardAccountLine@2x.png"; sourceTree = "<group>"; };
+		CEDBAD55160EBD120086BBAF /* SNWeiboDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboDetailViewController.h; sourceTree = "<group>"; };
+		CEDBAD56160EBD120086BBAF /* SNWeiboDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboDetailViewController.m; sourceTree = "<group>"; };
 		CEDC794B160860D80002A2BE /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		CEDC794C160860D80002A2BE /* LOGO_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOGO_48x48.png; sourceTree = "<group>"; };
 		CEDFCB0A16002FD300371A10 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -414,6 +463,14 @@
 				CEE4E9E015F241BA006E8981 /* SNWeiboAppDelegate.h */,
 				CEE4E9E115F241BA006E8981 /* SNWeiboAppDelegate.m */,
 				CEE4E9E315F241BA006E8981 /* MainStoryboard.storyboard */,
+				CED4585216114D6400C31A6B /* CommentTableViewCell.h */,
+				CED4585316114D6400C31A6B /* CommentTableViewCell.m */,
+				CED5B35E160F003400D5C8C9 /* SNWeiboDetailHeaderVC.h */,
+				CED5B35F160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m */,
+				CEDBAD55160EBD120086BBAF /* SNWeiboDetailViewController.h */,
+				CEDBAD56160EBD120086BBAF /* SNWeiboDetailViewController.m */,
+				CEDAB983160B4A760013155F /* SNWeiboSendWeiboViewController.h */,
+				CEDAB984160B4A760013155F /* SNWeiboSendWeiboViewController.m */,
 				CED5E26C15FBA7AB00F973CB /* StatusTableViewCell.h */,
 				CED5E26D15FBA7AB00F973CB /* StatusTableViewCell.m */,
 				CEE4E9E615F241BA006E8981 /* SNWeiboViewController.h */,
@@ -422,12 +479,21 @@
 				CEE4EA1E15F247EB006E8981 /* OAthWebViewController.m */,
 				CEE4EA2015F249A2006E8981 /* SNWeiboHttpManager.h */,
 				CEE4EA2115F249A2006E8981 /* SNWeiboHttpManager.m */,
+				CEDA5E24160C9B2E00995ED1 /* SNWeiboDefines.h */,
 				CED53607160219CA00C6996C /* SNWeiboEngine.h */,
 				CED53608160219CA00C6996C /* SNWeiboEngine.m */,
 				CED1BE2D15FF84E500DC69F4 /* SNWeiboImageDownload.h */,
 				CED1BE2E15FF84E500DC69F4 /* SNWeiboImageDownload.m */,
 				CED2273415F65002004EA62A /* SNWeiboFirstViewController.h */,
 				CED2273515F65002004EA62A /* SNWeiboFirstViewController.m */,
+				CEDAB963160B3F680013155F /* DESinaWeiboSheetCardView.h */,
+				CEDAB964160B3F680013155F /* DESinaWeiboSheetCardView.m */,
+				CEDAB977160B48130013155F /* DEEmbossedLabel.h */,
+				CEDAB978160B48130013155F /* DEEmbossedLabel.m */,
+				CEDAB979160B48130013155F /* DERuledView.h */,
+				CEDAB97A160B48130013155F /* DERuledView.m */,
+				CEDAB97B160B48130013155F /* DESinaWeiboTextView.h */,
+				CEDAB97C160B48130013155F /* DESinaWeiboTextView.m */,
 				CED26E0D16088D1700F99A1F /* Resources */,
 				CEE4E9D815F241BA006E8981 /* Supporting Files */,
 			);
@@ -448,6 +514,18 @@
 		CEE4EA2415F25143006E8981 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				CEDBAD4A160EAF7D0086BBAF /* DETweetCardAccountLine.png */,
+				CEDBAD4B160EAF7D0086BBAF /* DETweetCardAccountLine@2x.png */,
+				CEDAB986160B51B00013155F /* noImage50x118.png */,
+				CEDAB987160B51B00013155F /* noImage50x118@2x.png */,
+				CEDAB96F160B45550013155F /* DETweetCancelButtonPortrait.png */,
+				CEDAB970160B45550013155F /* DETweetCancelButtonPortrait@2x.png */,
+				CEDAB971160B45550013155F /* DETweetSendButtonPortrait.png */,
+				CEDAB972160B45550013155F /* DETweetSendButtonPortrait@2x.png */,
+				CEDAB96B160B436C0013155F /* DETweetPaperClip.png */,
+				CEDAB96C160B436C0013155F /* DETweetPaperClip@2x.png */,
+				CEDAB967160B3F870013155F /* DETweetCardBackground.png */,
+				CEDAB968160B3F870013155F /* DETweetCardBackground@2x.png */,
 				CEDC794C160860D80002A2BE /* LOGO_48x48.png */,
 				CED26E0F16088E5E00F99A1F /* followers.png */,
 				CED26E1016088E5E00F99A1F /* followers@2x.png */,
@@ -529,6 +607,18 @@
 				CED26E1416088E5E00F99A1F /* followers@2x.png in Resources */,
 				CED26E1516088E5E00F99A1F /* friends.png in Resources */,
 				CED26E1616088E5E00F99A1F /* friends@2x.png in Resources */,
+				CEDAB969160B3F870013155F /* DETweetCardBackground.png in Resources */,
+				CEDAB96A160B3F870013155F /* DETweetCardBackground@2x.png in Resources */,
+				CEDAB96D160B436C0013155F /* DETweetPaperClip.png in Resources */,
+				CEDAB96E160B436C0013155F /* DETweetPaperClip@2x.png in Resources */,
+				CEDAB973160B45550013155F /* DETweetCancelButtonPortrait.png in Resources */,
+				CEDAB974160B45550013155F /* DETweetCancelButtonPortrait@2x.png in Resources */,
+				CEDAB975160B45550013155F /* DETweetSendButtonPortrait.png in Resources */,
+				CEDAB976160B45550013155F /* DETweetSendButtonPortrait@2x.png in Resources */,
+				CEDAB988160B51B00013155F /* noImage50x118.png in Resources */,
+				CEDAB989160B51B00013155F /* noImage50x118@2x.png in Resources */,
+				CEDBAD4C160EAF7D0086BBAF /* DETweetCardAccountLine.png in Resources */,
+				CEDBAD4D160EAF7D0086BBAF /* DETweetCardAccountLine@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +674,14 @@
 				CED26E2A1608993000F99A1F /* UserCDModel.m in Sources */,
 				CED26E2D1608993100F99A1F /* StatusCDModel.m in Sources */,
 				CED26E3016089B8B00F99A1F /* UserCDModel+Utils.m in Sources */,
+				CEDAB965160B3F680013155F /* DESinaWeiboSheetCardView.m in Sources */,
+				CEDAB97D160B48130013155F /* DEEmbossedLabel.m in Sources */,
+				CEDAB97E160B48130013155F /* DERuledView.m in Sources */,
+				CEDAB97F160B48130013155F /* DESinaWeiboTextView.m in Sources */,
+				CEDAB985160B4A760013155F /* SNWeiboSendWeiboViewController.m in Sources */,
+				CEDBAD57160EBD120086BBAF /* SNWeiboDetailViewController.m in Sources */,
+				CED5B360160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m in Sources */,
+				CED4585416114D6400C31A6B /* CommentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

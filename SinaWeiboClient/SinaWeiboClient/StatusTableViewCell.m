@@ -65,7 +65,7 @@
     [self.contentText layoutIfNeeded];
     [self.contentText setNeedsDisplay];
     [self.contentText setNeedsLayout];
-    
+    [self.retwitterContentText layoutIfNeeded];
     
     CGRect frame=self.contentText.frame;
     frame.size=self.contentText.contentSize;
@@ -85,7 +85,7 @@
     if (hasRetwitterImage) {
         frame.size.height=self.retwitterContentText.frame.size.height+IMAGE_HEIGHT+36.0f;
     }else {
-        frame.size.height=self.retwitterContentText.frame.size.height;
+        frame.size.height=self.retwitterContentText.frame.size.height+26.0f;
     }
     
     
@@ -97,7 +97,7 @@
     
     if (hasContentImage) {
         frame=self.contentImage.frame;
-        frame.origin.y=self.contentText.frame.origin.y+self.contentText.frame.size.height+8.0f;
+        frame.origin.y=self.contentText.frame.origin.y+self.contentText.frame.size.height;
         frame.size.height=IMAGE_HEIGHT;
         self.contentImage.frame=frame;
     }
