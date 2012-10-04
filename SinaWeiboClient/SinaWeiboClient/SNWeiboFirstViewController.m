@@ -28,6 +28,7 @@
 @property (nonatomic,strong) SNWeiboEngine *weiboEngine;
 @property (nonatomic)   NSInteger statusCount;
 @property (nonatomic)  BOOL isFirstCell;
+@property (nonatomic)  BOOL isFirstAppear;
 @end
 
 @implementation SNWeiboFirstViewController
@@ -39,6 +40,7 @@
 @synthesize weiboEngine = _weiboEngine;
 @synthesize httpManager = _httpManager;
 @synthesize statusCount = _statusCount;
+@synthesize isFirstAppear = _isFirstAppear;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -71,12 +73,14 @@
     self.avaterImages=[NSMutableDictionary dictionary];
     self.contentImages=[NSMutableDictionary dictionary];
     self.isFirstCell=YES;
+    self.isFirstAppear=YES;
     self.statusCount=0;
     self.weiboEngine=[SNWeiboEngine getInstance];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetHomeTimeLine:) name:SINA_DIDGETHOMETIMELINE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResponseError:) name:SINA_DIDGETRESPONSEERROR object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetImage:) name:SINA_DID_GET_IMAGE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetHomeTimeLine:) name:SINA_DIDGETHOMETIMELINE object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetAccessToken:) name:DID_GET_ACCESS_TOKEN object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRequestFailed:) name:SINA_REQUESTFAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
@@ -106,6 +110,21 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.isFirstAppear) {
+        self.isFirstAppear=NO;
+        return;
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResponseError:) name:SINA_DIDGETRESPONSEERROR object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetImage:) name:SINA_DID_GET_IMAGE object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetAccessToken:) name:DID_GET_ACCESS_TOKEN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRequestFailed:) name:SINA_REQUESTFAILED object:nil];
+
 }
 
 -(BOOL)getData
@@ -230,23 +249,32 @@
     
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETRESPONSEERROR object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DID_GET_ACCESS_TOKEN object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETHOMETIMELINE object:nil];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_REQUESTFAILED object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+
     [super viewWillDisappear:animated];
 }
 
 
+
+
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
-       self.statuses=nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETHOMETIMELINE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETRESPONSEERROR object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DID_GET_ACCESS_TOKEN object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_REQUESTFAILED object:nil];
+    self.tableView=nil;
+    self.statuses=nil;
     self.avaterImages=nil;
     self.contentImages=nil;
     self.weiboEngine=nil;

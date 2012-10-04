@@ -40,11 +40,12 @@
     }
     self.timeLB.text=comment.timestamp;
     self.nameLB.text=comment.user.screenName;
+    
     self.textLB.text=comment.text;
     
-    CGSize size=[self.textLB.text sizeWithFont:[UIFont systemFontOfSize:14.0f] constrainedToSize:CGSizeMake(240, MAXFLOAT) lineBreakMode:UILineBreakModeCharacterWrap];
+    CGSize size=[self.textLB.text sizeWithFont:[UIFont systemFontOfSize:14.0f] constrainedToSize:CGSizeMake(230, MAXFLOAT) lineBreakMode:UILineBreakModeCharacterWrap];
     CGRect frame=self.textLB.frame;
-    frame.size=size;
+    frame.size.height=size.height;
     self.textLB.frame=frame;
     
 }

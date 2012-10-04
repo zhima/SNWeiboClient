@@ -186,6 +186,32 @@
     
 }
 
+- (void)getFriendshipsFollowersWithCount:(NSInteger)count cursor:(NSInteger)cursor trim_status:(NSInteger)trimed
+{
+    //https://api.weibo.com/2/friendships/followers.json
+    NSString *baseURL=[NSString stringWithString:SINA_API_DOMAIN];
+    baseURL=[baseURL stringByAppendingString:@"friendships/followers.json"];
+    NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:ACCESS_TOKEN];
+    NSString *userId=[[NSUserDefaults standardUserDefaults] objectForKey:USER_ID];
+    NSString *followersCount=[NSString stringWithFormat:@"%d",count];
+    NSString *followersCursor=[NSString stringWithFormat:@"%d",cursor];
+    NSString *followersTrimed=[NSString stringWithFormat:@"%d",trimed];
+    NSDictionary *params=[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                    token,@"access_token",
+                                                                    userId,@"uid",
+                                                                    followersCount,@"count",
+                                                                    followersCursor,@"cursor",
+                                                                    followersTrimed,@"trim_status", nil];
+    NSURL *url=[self generateUrl:baseURL withParams:params];
+    ASIHTTPRequest *request=[ASIHTTPRequest requestWithURL:url];
+    request.delegate=self;
+    [self setRequestUserInfo:request withRequestType:Sinagetfollowers];
+    [request setTimeOutSeconds:60];
+    [self.queue addOperation:request];
+
+}
+
+
 
 -(void)requestStarted:(ASIHTTPRequest *)request
 {
@@ -247,6 +273,16 @@
         if (statusId) {
             [self.delegate didSucceedPostUpload];
         }
+    }else if (requstType==Sinagetfollowers) {
+        NSArray *followerObjects=[responseObject objectForKey:@"users"];
+        NSMutableArray *followers=[NSMutableArray array];
+        for (NSDictionary *followerObj in followerObjects) {
+            User *user=[[User alloc] initWithJsonDictionary:followerObj];
+            NSLog(@"user description :%@",user.description);
+            [followers addObject:user];
+        }
+        NSLog(@"Get Followers count=%d",[followers count]);
+        [self.delegate didGetFriendshipsFollowers:followers];
     }
     
     

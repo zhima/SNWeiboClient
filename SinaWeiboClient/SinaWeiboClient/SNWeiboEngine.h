@@ -27,4 +27,6 @@
 
 -(void)getHomeTimeLineWithCount:(NSInteger)count Page:(NSInteger)page feature:(NSInteger)feature;
 -(void)getCommentsToShowWithStatusId:(NSNumber *)statusId Count:(NSInteger)count  Page:(NSInteger)page filter:(NSInteger)filter_by_author;
+- (void)getFriendshipsFollowersWithCount:(NSInteger)count cursor:(NSInteger)cursor trim_status:(NSInteger)trimed
+;
 @end

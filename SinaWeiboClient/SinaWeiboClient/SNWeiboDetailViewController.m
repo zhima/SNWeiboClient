@@ -35,7 +35,7 @@
 @property (nonatomic,strong) NSMutableArray *comments;
 @property (nonatomic,strong) NSMutableDictionary *avaterImageDic;
 @property (nonatomic) BOOL isFirstCell;
-
+@property (nonatomic) BOOL isFirstAppear;
 @end
 
 @implementation SNWeiboDetailViewController
@@ -58,6 +58,8 @@
 @synthesize comments = _comments;
 @synthesize avaterImageDic = _avaterImageDic;
 @synthesize isFirstCell = _isFirstCell;
+@synthesize isFirstAppear = _isFirstAppear;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -188,9 +190,14 @@
     self.comments=[NSMutableArray array];
     self.avaterImageDic=[NSMutableDictionary dictionary];
     self.isFirstCell=YES;
+    self.isFirstAppear=YES;
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetCommentsToShow:) name:SINA_DIDGETCOMMENTSTOSHOW object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetImage:) name:SINA_DID_GET_IMAGE object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetAccessToken:) name:DID_GET_ACCESS_TOKEN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRequestFailed:) name:SINA_REQUESTFAILED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResponseError:) name:SINA_DIDGETRESPONSEERROR object:nil];
     [self setupView:self.status withAvaterImageData:self.avaterImageData withContentImageData:self.contentImageData];
     self.tableView.tableHeaderView=self.headerView;
     
@@ -203,11 +210,52 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    if (self.isFirstAppear) {
+//        self.isFirstAppear=NO;
+//        return;
+//    }
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetImage:) name:SINA_DID_GET_IMAGE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetAccessToken:) name:DID_GET_ACCESS_TOKEN object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRequestFailed:) name:SINA_REQUESTFAILED object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleResponseError:) name:SINA_DIDGETRESPONSEERROR object:nil];
+//
+//}
+
+
+-(void)handleRequestFailed:(NSNotification *)notification
+{
+    [[SHKActivityIndicator currentIndicator] hide];
+    UIAlertView *requestFailedAlertView=[[UIAlertView alloc] initWithTitle:nil message:@"请求失败，请检查网络连接是否正常" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
+    [requestFailedAlertView show];
+}
+
+
+-(void)handleResponseError:(NSNotification *)notification
+{
+    [[SHKActivityIndicator currentIndicator] hide];
+    BOOL tokenExpired=[[SNWeiboEngine getInstance] hasAccessTokenOutOfDate];
+    if (tokenExpired) {
+        [[SNWeiboEngine getInstance] loginInViewController:self];
+    }
+
+}
+
+- (void)didGetAccessToken:(NSNotification *)notification
+{
+    [[SNWeiboEngine getInstance] getCommentsToShowWithStatusId:self.status.statusKey Count:30 Page:1 filter:0];
+    [[SHKActivityIndicator currentIndicator] displayActivity:@"Loading" inView:self.view];
+}
+
+
 
 -(void)getImage
 {
     if (self.comments==nil) {
         NSLog(@"comments Array is nil");
+         [[SHKActivityIndicator currentIndicator] hide];
         return;
     }
     NSInteger count=[self.comments count];
@@ -223,6 +271,10 @@
     NSDictionary *userInfo=[notification userInfo];
     self.comments=[userInfo objectForKey:COMMENTSTOSHOW];
     NSLog(@"get Comments count is %d",[self.comments count]);
+    if ([self.comments count]==0) {
+        [[SHKActivityIndicator currentIndicator] hide];
+        return;
+    }
     [self getImage];
     
 }
@@ -237,6 +289,7 @@
     NSInteger index=[indexNum integerValue];
     static NSInteger commentsCount=0;
     
+    
     Comment *comment=[self.comments objectAtIndex:index];
     
     if ([key isEqualToString:comment.user.profileImageUrl]) {
@@ -245,14 +298,30 @@
         NSLog(@"comments Count=%d",commentsCount);
         if (commentsCount==[self.comments count]) {
             commentsCount=0;
+            [[SHKActivityIndicator currentIndicator] hide];
             [self.tableView reloadData];
         }
     }
 }
 
 
+
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETRESPONSEERROR object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:DID_GET_ACCESS_TOKEN object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_REQUESTFAILED object:nil];
+//    [super viewWillDisappear:animated];
+//}
+
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETCOMMENTSTOSHOW object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETRESPONSEERROR object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DID_GET_ACCESS_TOKEN object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_REQUESTFAILED object:nil];
     [self setAvaterImage:nil];
     [self setNameLB:nil];
     [self setTimeLB:nil];
@@ -264,8 +333,8 @@
     [self setRetweetContentImage:nil];
     [self setFromLB:nil];
     [self setCountLB:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DIDGETCOMMENTSTOSHOW object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SINA_DID_GET_IMAGE object:nil];
+    
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -289,6 +358,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
+    
     return [self.comments count];
 }
 
@@ -303,10 +373,11 @@
     NSData *data=[self.avaterImageDic objectForKey:comment.user.profileImageUrl];
     [cell setupCommentCell:comment withAvaterImage:data];
     // Configure the cell...
-    if (self.isFirstCell) {
-        self.isFirstCell=NO;
-        [[SHKActivityIndicator currentIndicator] hide];
-    }
+//    if (self.isFirstCell) {
+//        [[SHKActivityIndicator currentIndicator] hide];
+//        self.isFirstCell=NO;
+//        
+//    }
     return cell;
 }
 
@@ -321,44 +392,7 @@
     
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

@@ -97,6 +97,7 @@
 	
 	location        = [dic objectForKey:@"location"];
 	description     = [dic objectForKey:@"description"];
+   // NSLog(@"user description:%@",description);
 	url             = [dic objectForKey:@"url"];
     profileImageUrl = [dic objectForKey:@"profile_image_url"];
 	domain			= [dic objectForKey:@"domain"];
@@ -146,8 +147,10 @@
 	[city retain];
     //location = [[location unescapeHTML] retain];
    // description = [[description unescapeHTML] retain];
-    location=@"";
-    description=@"";
+//    location=@"";
+//    description=@"";
+    [location retain];
+    [description retain];
     [url retain];
     [profileImageUrl retain];
 	[domain retain];

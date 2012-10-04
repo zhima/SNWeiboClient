@@ -87,6 +87,11 @@
     [self.httpManager getCommentsToShowWithStatusId:statusId Count:count Page:page filter:filter_by_author];
 }
 
+- (void)getFriendshipsFollowersWithCount:(NSInteger)count cursor:(NSInteger)cursor trim_status:(NSInteger)trimed
+{
+    [self.httpManager getFriendshipsFollowersWithCount:count cursor:cursor trim_status:trimed];
+}
+
 
 -(void)postStatus:(NSString *)text withImage:(UIImage *)image
 {
@@ -128,6 +133,13 @@
 {
     NSDictionary *userInfo=[NSDictionary dictionaryWithObject:commentsArr forKey:COMMENTSTOSHOW];
     NSNotification *notification=[NSNotification notificationWithName:SINA_DIDGETCOMMENTSTOSHOW object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
+-(void)didGetFriendshipsFollowers:(NSMutableArray *)followersArr
+{
+    NSDictionary *userInfo=[NSDictionary dictionaryWithObject:followersArr forKey:FRIENDSHIPSFOLLOWERS];
+    NSNotification *notification=[NSNotification notificationWithName:SINA_DIDGETFRIENDSHIPSFOLLOWERS object:self userInfo:userInfo];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 

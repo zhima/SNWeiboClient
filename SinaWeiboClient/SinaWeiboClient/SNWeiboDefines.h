@@ -13,10 +13,11 @@
 #define SINA_DIDGETCOMMENTSTOSHOW @"SINA_DIDGETCOMMENTSTOSHOW"  //根据微博ID返回某条微博的评论列表
 #define SINA_DIDSUCCEEDPOSTUPDATE @"SINA_DIDSUCCEEDPOSTUPDATE"
 #define SINA_DIDSUCCEEDPOSTUPLOAD @"SINA_DIDSUCCEEDPOSTUPLOAD"
+#define SINA_DIDGETFRIENDSHIPSFOLLOWERS @"SINA_DIDGETFRIENDSHIPSFOLLOWERS"
 
 #define HOMETIMELINE @"HOMETIMELINE"
 #define COMMENTSTOSHOW @"COMMENTSTOSHOW"
-
+#define FRIENDSHIPSFOLLOWERS @"FRIENDSHIPSFOLLOWERS"
 
 
 #define SINA_DIDGETRESPONSEERROR @"SINA_DIDGETRESPONSEERROR"
@@ -39,6 +40,7 @@ typedef enum {
     Sinaupdate,             //发布一条新微博
     Sinaupload,             //上传图片并发布一条新微博
     Sinagetusertimeline,    //获取某个用户最新发表的微博列表
-    Sinagetcommentstoshow   //根据微博ID返回某条微博的评论列表
+    Sinagetcommentstoshow,   //根据微博ID返回某条微博的评论列表
+    Sinagetfollowers          //获取用户的粉丝列表
 }RequestType;
 #endif

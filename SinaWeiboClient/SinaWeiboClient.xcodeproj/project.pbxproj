@@ -17,6 +17,9 @@
 		CED0BF9415FC323F00E6F95A /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0BF8C15FC323F00E6F95A /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED0BF9515FC323F00E6F95A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0BF8E15FC323F00E6F95A /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CED0BF9615FC323F00E6F95A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0BF9015FC323F00E6F95A /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CED1898B1619EA96008D8EC5 /* FansTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED1898A1619EA96008D8EC5 /* FansTableViewCell.m */; };
+		CED1898F1619EC29008D8EC5 /* SNWeiboFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED1898E1619EC29008D8EC5 /* SNWeiboFansViewController.m */; };
+		CED189961619F3F6008D8EC5 /* SNWeiboHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED189951619F3F6008D8EC5 /* SNWeiboHomeViewController.m */; };
 		CED1BE2F15FF84E500DC69F4 /* SNWeiboImageDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = CED1BE2E15FF84E500DC69F4 /* SNWeiboImageDownload.m */; };
 		CED2273615F65002004EA62A /* SNWeiboFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED2273515F65002004EA62A /* SNWeiboFirstViewController.m */; };
 		CED2274815F656AD004EA62A /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CED2274715F656AD004EA62A /* libxml2.2.7.3.dylib */; };
@@ -121,6 +124,12 @@
 		CED0BF8E15FC323F00E6F95A /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		CED0BF8F15FC323F00E6F95A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CED0BF9015FC323F00E6F95A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		CED189891619EA96008D8EC5 /* FansTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FansTableViewCell.h; sourceTree = "<group>"; };
+		CED1898A1619EA96008D8EC5 /* FansTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FansTableViewCell.m; sourceTree = "<group>"; };
+		CED1898D1619EC29008D8EC5 /* SNWeiboFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboFansViewController.h; sourceTree = "<group>"; };
+		CED1898E1619EC29008D8EC5 /* SNWeiboFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboFansViewController.m; sourceTree = "<group>"; };
+		CED189941619F3F6008D8EC5 /* SNWeiboHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboHomeViewController.h; sourceTree = "<group>"; };
+		CED189951619F3F6008D8EC5 /* SNWeiboHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboHomeViewController.m; sourceTree = "<group>"; };
 		CED1BE2D15FF84E500DC69F4 /* SNWeiboImageDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboImageDownload.h; sourceTree = "<group>"; };
 		CED1BE2E15FF84E500DC69F4 /* SNWeiboImageDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNWeiboImageDownload.m; sourceTree = "<group>"; };
 		CED2273415F65002004EA62A /* SNWeiboFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNWeiboFirstViewController.h; sourceTree = "<group>"; };
@@ -290,6 +299,21 @@
 				CED0BF9015FC323F00E6F95A /* SBJsonWriter.m */,
 			);
 			path = SBJSON;
+			sourceTree = "<group>";
+		};
+		CED189981619F739008D8EC5 /* DESendWeiboSheet */ = {
+			isa = PBXGroup;
+			children = (
+				CEDAB963160B3F680013155F /* DESinaWeiboSheetCardView.h */,
+				CEDAB964160B3F680013155F /* DESinaWeiboSheetCardView.m */,
+				CEDAB977160B48130013155F /* DEEmbossedLabel.h */,
+				CEDAB978160B48130013155F /* DEEmbossedLabel.m */,
+				CEDAB979160B48130013155F /* DERuledView.h */,
+				CEDAB97A160B48130013155F /* DERuledView.m */,
+				CEDAB97B160B48130013155F /* DESinaWeiboTextView.h */,
+				CEDAB97C160B48130013155F /* DESinaWeiboTextView.m */,
+			);
+			name = DESendWeiboSheet;
 			sourceTree = "<group>";
 		};
 		CED26E0D16088D1700F99A1F /* Resources */ = {
@@ -463,6 +487,12 @@
 				CEE4E9E015F241BA006E8981 /* SNWeiboAppDelegate.h */,
 				CEE4E9E115F241BA006E8981 /* SNWeiboAppDelegate.m */,
 				CEE4E9E315F241BA006E8981 /* MainStoryboard.storyboard */,
+				CED189941619F3F6008D8EC5 /* SNWeiboHomeViewController.h */,
+				CED189951619F3F6008D8EC5 /* SNWeiboHomeViewController.m */,
+				CED1898D1619EC29008D8EC5 /* SNWeiboFansViewController.h */,
+				CED1898E1619EC29008D8EC5 /* SNWeiboFansViewController.m */,
+				CED189891619EA96008D8EC5 /* FansTableViewCell.h */,
+				CED1898A1619EA96008D8EC5 /* FansTableViewCell.m */,
 				CED4585216114D6400C31A6B /* CommentTableViewCell.h */,
 				CED4585316114D6400C31A6B /* CommentTableViewCell.m */,
 				CED5B35E160F003400D5C8C9 /* SNWeiboDetailHeaderVC.h */,
@@ -486,14 +516,7 @@
 				CED1BE2E15FF84E500DC69F4 /* SNWeiboImageDownload.m */,
 				CED2273415F65002004EA62A /* SNWeiboFirstViewController.h */,
 				CED2273515F65002004EA62A /* SNWeiboFirstViewController.m */,
-				CEDAB963160B3F680013155F /* DESinaWeiboSheetCardView.h */,
-				CEDAB964160B3F680013155F /* DESinaWeiboSheetCardView.m */,
-				CEDAB977160B48130013155F /* DEEmbossedLabel.h */,
-				CEDAB978160B48130013155F /* DEEmbossedLabel.m */,
-				CEDAB979160B48130013155F /* DERuledView.h */,
-				CEDAB97A160B48130013155F /* DERuledView.m */,
-				CEDAB97B160B48130013155F /* DESinaWeiboTextView.h */,
-				CEDAB97C160B48130013155F /* DESinaWeiboTextView.m */,
+				CED189981619F739008D8EC5 /* DESendWeiboSheet */,
 				CED26E0D16088D1700F99A1F /* Resources */,
 				CEE4E9D815F241BA006E8981 /* Supporting Files */,
 			);
@@ -682,6 +705,9 @@
 				CEDBAD57160EBD120086BBAF /* SNWeiboDetailViewController.m in Sources */,
 				CED5B360160F003400D5C8C9 /* SNWeiboDetailHeaderVC.m in Sources */,
 				CED4585416114D6400C31A6B /* CommentTableViewCell.m in Sources */,
+				CED1898B1619EA96008D8EC5 /* FansTableViewCell.m in Sources */,
+				CED1898F1619EC29008D8EC5 /* SNWeiboFansViewController.m in Sources */,
+				CED189961619F3F6008D8EC5 /* SNWeiboHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
